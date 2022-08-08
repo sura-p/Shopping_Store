@@ -1,47 +1,72 @@
-// https://youtu.be/CDtPMR5y0QU
-import React, { useEffect, useState } from "react";
+
+import React, { useEffect, useReducer, useState } from "react";
 import { Link } from "react-router-dom";
-// import data from "../../../Server/data/data";
+// import data from "../data";
 import axios from 'axios'
+import logger from 'use-reducer-logger'
+import { Col, Row } from "react-bootstrap";
+import Product from "../Component/Product";
+const reducer = (state, action) => {
+  switch (action.type) {
+    case 'FETCH_REQUEST':
+      return { ...state, loading: true };
+    case 'FETCH_SUCESS':
+      return { ...state, products: action.payload, loading: false };
+    case 'FETCH_FAIL':
+      return { ...state, loading: false, error: action.payload }
+    default:
+      return state;
+  }
+};
 function HomeScreen() {
-    const [product ,setproducts] =useState([])
-    useEffect(()=>{
-        const fetchdata = async ()=>{
-            const result = await axios({
-                method: 'get',
-                url: '/api/products',
-               
-                headers: { 'Content-Type': 'application/json'}
-              })
-                .then(function (response) {
-                    console.log(response);
-                    setproducts(result);
-                }).catch(error => {
-                    console.log(error.response)
-                });
-           
-        }  
-        fetchdata();    
-    },[])
+  const [{ loading, error, products }, dispatch] = useReducer(logger(reducer), {
+    products: [],
+    loading: true,
+    error: ''
+  });
+  //  const [product ,setproducts] =useState([])
+  useEffect(() => {
+    const fetchdata = async () => {
+      dispatch({ type: 'FETCH_REQUEST' });
+      try {
+        const result = await axios({
+          method: 'get',
+          url: 'http://localhost:5001/api/products',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+
+        })
+          .then(function (response) {
+            dispatch({ type: 'FETCH_SUCESS', payload: response.data });
+          })
+
+      } catch (error) {
+        dispatch({ type: 'FETCH_FAIL', payload: error.message })
+
+      }
+
+
+    }
+    fetchdata();
+  }, [])
   return (
     <div>
       <h1>Featured Products</h1>
       <div className="products">
-        {product.map((product) => (
-          <div className="product" key={product.slug}>
-            <Link to={`/product/${product.slug}`}>
-            <img src={product.image} alt={product.name} />
-            </Link>
-            <div className="product-info">
-                <Link to={`/product/${product.slug}`}>
-              <p>{product.name}</p>
-              </Link>
-              <p><strong>$ {product.price}</strong></p>
+        {loading ? (<div>Loading...</div>) : error ? (<div>{error}</div>) : (
 
-              <button>Add to cart</button>
-            </div>
-          </div>
-        ))}
+          <Row>
+            {
+
+
+              products.map((product) => (
+                <Col sm={2} md={4} lg={3} className="mb-3">
+                <Product product={product}></Product>
+                </Col>
+              ))}
+          </Row>)}
+
       </div>
     </div>
   );
