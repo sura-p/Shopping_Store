@@ -6,6 +6,7 @@ import axios from 'axios'
 import logger from 'use-reducer-logger'
 import { Col, Row } from "react-bootstrap";
 import Product from "../Component/Product";
+import { Helmet } from "react-helmet-async";
 const reducer = (state, action) => {
   switch (action.type) {
     case 'FETCH_REQUEST':
@@ -31,7 +32,7 @@ function HomeScreen() {
       try {
         const result = await axios({
           method: 'get',
-          url: 'http://localhost:5001/api/products',
+          url: '/api/products',
           headers: {
             'Content-Type': 'application/json'
           }
@@ -52,6 +53,7 @@ function HomeScreen() {
   }, [])
   return (
     <div>
+      <Helmet><title>Shopping Cart</title></Helmet>
       <h1>Featured Products</h1>
       <div className="products">
         {loading ? (<div>Loading...</div>) : error ? (<div>{error}</div>) : (
@@ -61,7 +63,7 @@ function HomeScreen() {
 
 
               products.map((product) => (
-                <Col sm={2} md={4} lg={3} className="mb-3">
+                <Col sm={2} md={3} lg={4} className="mb-3">
                 <Product product={product}></Product>
                 </Col>
               ))}
