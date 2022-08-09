@@ -8,7 +8,7 @@ import Rating from './Rating';
 function Product(props) {
   const dispatch = useDispatch();
     const {product}=props;
-    console.log(product.slug);
+    
     const addtocarthandler = (id) => {
       dispatch(addtocart(id));
     };

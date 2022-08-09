@@ -31,25 +31,31 @@ import { useDispatch, useSelector } from "react-redux";
 function ProductScreen() {
   const params = useParams();
   const { slug } = params;
-  console.log(slug);
+
   const dispatch = useDispatch();
   const data = useSelector((state) => state);
+  console.log(data);
   const addtocarthandler = (id) => {
-    console.log(data.product.CartsItems);
-    const existsItem = data.product.CartsItems.find((x)=> x[0].id == id);
-    console.log(existsItem);
+  //  const existsItem = data.product.CartsItems.find((x)=> x.item.id == id);
     
-    const quantity = existsItem?existsItem.quantity + 1:1;
-    //console.log(quantity);
-    const data1=data.product.products.filter((ele) => {
-      return ele.id == id;
-    });
-    //console.log(data1);
-   if(data1[0].countInStock < quantity){
-     window.alert('sorry, product is out of stock')
-   }
+  //  console.log(existsItems);
+   
+
+  //  const quantity = existsItem?existsItem.quantity++ : 1 ;
+  // console.log("quantity",quantity);
+    
+    
+   
+   
+   
     dispatch(addtocart(id));
-  };
+    
+   
+  
+   
+   }
+    
+  
  
   // const dispatch = useDispatch()
   // const addtocarthandler = (id) => {
@@ -61,11 +67,12 @@ function ProductScreen() {
   //   error: "",
   // });
   //  const [product ,setproducts] =useState([])
-  console.log(data.product.products);
-  const toshow = data.product.products.filter((ele) => {
-    return ele.id == 1;
+ 
+  const toshow = data.product.products.find((ele) => {
+    return ele.id == slug;
   });
-  console.log(toshow);
+  
+  
 
   return(
     data.product.loading ? (
@@ -76,13 +83,13 @@ function ProductScreen() {
       <div>
         <Row>
           <Col md={6}>
-            <img className="img-large" src={toshow[0].image} alt={toshow[0].name}></img>
+            <img className="img-large" src={toshow.image} alt={toshow.name}></img>
           </Col>
           <Col md={3}>
             <ListGroup variant="flush">
               <ListGroup.Item>
                 <Helmet>
-                  <title>{toshow[0].name}</title>
+                  <title>{toshow.name}</title>
                 </Helmet>
                 <h1>{toshow.name}</h1>
               </ListGroup.Item>
@@ -92,9 +99,9 @@ function ProductScreen() {
                   numReviews={toshow.numReviews}
                 ></Rating>
               </ListGroup.Item>
-              <ListGroup.Item>Price : ${toshow[0].price}</ListGroup.Item>
+              <ListGroup.Item>Price : ${toshow.price}</ListGroup.Item>
               <ListGroup.Item>
-                Description : <p>{toshow[0].description}</p>
+                Description : <p>{toshow.description}</p>
               </ListGroup.Item>
             </ListGroup>
           </Col>
@@ -105,7 +112,7 @@ function ProductScreen() {
                   <ListGroup.Item>
                     <Row>
                       <Col>Price:</Col>
-                      <Col>${toshow[0].price}</Col>
+                      <Col>${toshow.price}</Col>
                     </Row>
                   </ListGroup.Item>
   
@@ -113,7 +120,7 @@ function ProductScreen() {
                     <Row>
                       <Col>Status:</Col>
                       <Col>
-                        {toshow[0].countInStock > 0 ? (
+                        {toshow.countInStock > 0 ? (
                           <Badge bg="success">In Stock</Badge>
                         ) : (
                           <Badge bg="danger">Unavailable</Badge>
@@ -122,10 +129,10 @@ function ProductScreen() {
                     </Row>
                   </ListGroup.Item>
   
-                  {toshow[0].countInStock > 0 && (
+                  {toshow.countInStock > 0 && (
                     <ListGroup.Item>
                       <div className="d-grid">
-                        <Button onClick={()=>addtocarthandler(toshow[0].id)} variant="primary">Add to Cart</Button>
+                        <Button onClick={()=>addtocarthandler(toshow.id)} variant="primary">Add to Cart</Button>
                       </div>
                     </ListGroup.Item>
                   )}

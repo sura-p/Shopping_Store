@@ -37,8 +37,8 @@ function HomeScreen() {
 
 
               data.product.products.map((product) => (
-                <Col sm={2} md={3} lg={4} className="mb-3">
-                <Product product={product}></Product>
+                <Col sm={2} md={3} lg={4} className="mb-3" key={product.slug}>
+                <Product product={product} ></Product>
                 </Col>
               ))}
           </Row>)}

@@ -17,7 +17,7 @@ import CartScreen from "./screens/CartScreen";
 
 function App() {
   const data = useSelector((state) => state);
-  console.log(data.product.CartsItems);
+  
   return (
    
     <div className="d-flex flex-column site-container">

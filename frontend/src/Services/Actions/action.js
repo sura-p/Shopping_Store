@@ -33,7 +33,7 @@ export const fetchdata =  () => {
 
   export const addtocart = (id) =>{
       return (dispatch)=>{
-        dispatch({ type: 'CART_ADD_ITEMS' ,payload:{id,quantity:1}});
+        dispatch({ type: 'CART_ADD_ITEMS' ,payload:{id}});
 
       }
     

@@ -11,10 +11,11 @@ import { addtocart, removefromcart } from '../Services/Actions/action';
 
 function CartScreen() {
     const data = useSelector(state=>state.product.CartsItems)
+   console.log(data);
    const dispatch = useDispatch()
-    console.log(data);
+   
     const updateCartHandler = (item)=>{
-        console.log(item);
+        
         dispatch(addtocart(item));
    
     }
