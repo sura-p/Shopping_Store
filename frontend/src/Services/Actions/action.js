@@ -32,8 +32,9 @@ export const fetchdata =  () => {
   }
 
   export const addtocart = (id) =>{
+    
       return (dispatch)=>{
-        dispatch({ type: 'CART_ADD_ITEMS' ,payload:{id}});
+        dispatch({ type: 'CART_ADD_ITEMS' ,payload:{id }});
 
       }
     

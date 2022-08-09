@@ -14,9 +14,22 @@ import { CarouselItem } from "react-bootstrap";
 import { useSelector } from "react-redux";
 import { Badge } from "react-bootstrap";
 import CartScreen from "./screens/CartScreen";
+import { useEffect, useState } from "react";
+import { NavItem } from "react-bootstrap";
 
 function App() {
-  const data = useSelector((state) => state);
+  const data = useSelector((state) => state.product.CartsItems);
+  console.log(data);
+  const[count,setcount]=useState(0)
+
+  useEffect(()=>{
+    let i=0;
+    data?.forEach((element) => {
+         i=+element.qty 
+      
+    });
+    setcount(i)
+  },[count,data])
   
   return (
    
@@ -31,8 +44,8 @@ function App() {
               <Link to="/cart" className="nav-link">
                 Cart
                 {
-                  data.product.CartsItems.length > 0 && (<Badge pill bg ='danger'>
-                    {data.product.CartsItems.length}
+                  data.length > 0 && (<Badge pill bg ='danger'>
+                    {count}
                   </Badge>)
                 }
               </Link>

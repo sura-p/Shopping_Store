@@ -1,4 +1,4 @@
-// import { SHOW_MOVIES, WATCH_LATER } from "../constants";
+// import { SHOW_MOVIES, WATCH_LATER } from "../constants" https://youtu.be/MNs_7avLIJ4;
 
 const initialState = {
   products: [],
@@ -17,17 +17,18 @@ export function FETCH(state = initialState, action) {
       return { ...state, loading: false, error: action.payload };
     case "CART_ADD_ITEMS":
       const data = state.products.find((item) => item.id === action.payload.id);
-      const inCart = state.CartsItems.find((item) =>
-        item.id === action.payload.id ? true : false
+      const inCart = state.CartsItems.some((item) =>
+        item.id == action.payload.id ? true : false
       );
-      console.log(data);
+      console.log(inCart);
       // data[0].quantity = action.payload.quantity;
       return {
         ...state,
         CartsItems: inCart
           ? state.CartsItems.map((item) =>
+        
               item.id === action.payload.id
-                ? { ...item, qty: item.qty ++ }
+                ? { ...item, qty: item.qty+=1 }
                 : item
             )
           : [...state.CartsItems, { ...data, qty: 1 }],
