@@ -4,7 +4,7 @@ const initialState = {
   products: [],
   loading: true,
   error: "",
-  CartsItems: [],
+  CartsItems: localStorage.getItem('Cartitems')?JSON.parse(localStorage.getItem('Cartitems')):[]
 };
 
 export function FETCH(state = initialState, action) {

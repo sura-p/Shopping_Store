@@ -3,8 +3,9 @@ import { Button, Card } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { addtocart } from '../Services/Actions/action';
-import Rating from './Rating';
+import Rating from './Rating'
 
+//mongodb+srv://shoppingcart:<password>@cluster0.5rr4tzx.mongodb.net/?retryWrites=true&w=majority
 function Product(props) {
   const dispatch = useDispatch();
     const {product}=props;

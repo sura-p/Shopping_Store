@@ -1,11 +1,21 @@
 import express from 'express'
 import data from './data/data.js';
+import mongoose from 'mongoose';
+import dotenv from 'dotenv'
+import seedRouter from './Routes/seedRoutes.js';
+
+
+
+dotenv.config()
+mongoose.connect(process.env.MONGODB_URI).then(()=>{
+  console.log("connected to db");  
+}).catch(err=>{
+    console.log(err.message);
+});
 
 
 const app = express();
-// app.use(()=>{
-
-// })
+app.use('/api/seed',seedRouter)
 app.use(express.json());
 app.get("/",(req,res)=>{
     res.send("API is running");
