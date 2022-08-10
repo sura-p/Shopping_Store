@@ -17,30 +17,44 @@ export function FETCH(state = initialState, action) {
       return { ...state, loading: false, error: action.payload };
     case "CART_ADD_ITEMS":
       const data = state.products.find((item) => item.id === action.payload.id);
-      const inCart = state.CartsItems.some((item) =>
+      const Cart = state.CartsItems.find((item) =>
+      item.id == action.payload.id ? true : false
+    );
+      if(Cart?.qty>data?.countInStock){
+
+        window.alert("out of stock")
+       return{...state,CartsItems:[...state.CartsItems]}
+      }
+      else{
+        const inCart = state.CartsItems.some((item) =>
         item.id == action.payload.id ? true : false
       );
       console.log(inCart);
       // data[0].quantity = action.payload.quantity;
+      const a = inCart
+      ? state.CartsItems.map((item) =>
+    
+          item.id === action.payload.id
+            ? { ...item, qty: item.qty+=1 }
+            : item
+        )
+      : [...state.CartsItems, { ...data, qty: 1 }]
+      localStorage.setItem('Cartitems',JSON.stringify(a));
       return {
         ...state,
-        CartsItems: inCart
-          ? state.CartsItems.map((item) =>
-        
-              item.id === action.payload.id
-                ? { ...item, qty: item.qty+=1 }
-                : item
-            )
-          : [...state.CartsItems, { ...data, qty: 1 }],
+        CartsItems:a 
       };
+
+      }
+      
      
     // console.log(data[0].quantity);
 
     case "REMOVE_CART_ITEM":
-      const cartItems = state.CartsItems.filter(
-        (item) => item[0].id !== action.payload.id
-      );
-      return { ...state, CartsItems: [cartItems] };
+      
+    return{
+      ...state,CartsItems:state.CartsItems.filter(item=> item.id !== action.payload.id)
+    }
 
     default:
       return state;

@@ -37,28 +37,28 @@ function CartScreen() {
                 (<ListGroup>
                     {data.map((item)=>(
                         
-                        <ListGroup.Item key={item[0]?.id}>
+                        <ListGroup.Item key={item.id}>
                             <Row className='align-items-center'>
                             <Col md={4}>
-                                <img src={item[0]?.image}
-                                alt={item[0]?.name}
+                                <img src={item.image}
+                                alt={item.name}
                                 className='img-fluid rounded img-thumbnail'>
 
                                 </img>
                                 </Col> 
                                 <Col md={3}>
-                                    <Button variant="light" disabled={item[0]?.quantity===1}>
+                                    <Button variant="light" disabled={item.qty===1}>
                                         <i className='fas fa-minus-circle'></i>
                                     </Button>
-                                    <span>{item[0]?.quantity}</span>
-                                    <Button onClick={()=>updateCartHandler(item[0]?.id)} variant="light" disabled={item[0]?.quantity===1}>
+                                    <span>{item.qty}</span>
+                                    <Button onClick={()=>updateCartHandler(item.id)} variant="light" >
                                         <i className='fas fa-plus-circle'></i>
                                     </Button>
                                     </Col> 
 
-                                    <Col md={3}>${item[0]?.price}</Col>
+                                    <Col md={3}>${item.price}</Col>
                                     <Col md={2}>
-                                        <Button onClick={()=>removecartitem(item[0]?.id)} variant='light' ><i className='fas fa-trash'></i></Button>
+                                        <Button onClick={()=>removecartitem(item.id)} variant='light' ><i className='fas fa-trash'></i></Button>
                                     </Col>
                             </Row>
                         </ListGroup.Item>

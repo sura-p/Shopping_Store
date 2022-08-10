@@ -16,6 +16,7 @@ import { Badge } from "react-bootstrap";
 import CartScreen from "./screens/CartScreen";
 import { useEffect, useState } from "react";
 import { NavItem } from "react-bootstrap";
+import SigninScreen from "./screens/SigninScreen";
 
 function App() {
   const data = useSelector((state) => state.product.CartsItems);
@@ -59,6 +60,7 @@ function App() {
         <Routes>
           <Route path='/' element={<HomeScreen/>}/>
           <Route path='/cart' element={<CartScreen/>}/>
+          <Route path='/signin' element={<SigninScreen/>}/>
           <Route path='/product/:slug' element={<ProductScreen/>}/>
         </Routes>
         </Container>
