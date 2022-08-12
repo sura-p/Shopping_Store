@@ -43,7 +43,7 @@ function CartScreen() {
           ) : (
             <ListGroup>
               {data.map((item) => (
-                <ListGroup.Item key={item.id}>
+                <ListGroup.Item key={item._id}>
                   <Row className="align-items-center">
                     <Col md={4}>
                       <img
@@ -58,7 +58,7 @@ function CartScreen() {
                       </Button>
                       <span>{item.qty}</span>
                       <Button
-                        onClick={() => updateCartHandler(item.id)}
+                        onClick={() => updateCartHandler(item._id)}
                         variant="light"
                       >
                         <i className="fas fa-plus-circle"></i>
@@ -68,7 +68,7 @@ function CartScreen() {
                     <Col md={3}>${item.price}</Col>
                     <Col md={2}>
                       <Button
-                        onClick={() => removecartitem(item.id)}
+                        onClick={() => removecartitem(item._id)}
                         variant="light"
                       >
                         <i className="fas fa-trash"></i>

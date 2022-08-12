@@ -1,4 +1,4 @@
-// import { SHOW_MOVIES, WATCH_LATER } from "../constants" https://youtu.be/MNs_7avLIJ4;
+// import { SHOW_MOVIES, WATCH_LATER } from "../constants";
 
 const initialState = {
   products: [],
@@ -16,9 +16,9 @@ export function FETCH(state = initialState, action) {
     case "FETCH_FAIL":
       return { ...state, loading: false, error: action.payload };
     case "CART_ADD_ITEMS":
-      const data = state.products.find((item) => item.id === action.payload.id);
+      const data = state.products.find((item) => item._id === action.payload.id);
       const Cart = state.CartsItems.find((item) =>
-      item.id == action.payload.id ? true : false
+      item._id == action.payload.id ? true : false
     );
       if(Cart?.qty>data?.countInStock){
 
@@ -27,14 +27,14 @@ export function FETCH(state = initialState, action) {
       }
       else{
         const inCart = state.CartsItems.some((item) =>
-        item.id == action.payload.id ? true : false
+        item._id == action.payload.id ? true : false
       );
       console.log(inCart);
       // data[0].quantity = action.payload.quantity;
       const a = inCart
       ? state.CartsItems.map((item) =>
     
-          item.id === action.payload.id
+          item._id === action.payload.id
             ? { ...item, qty: item.qty+=1 }
             : item
         )

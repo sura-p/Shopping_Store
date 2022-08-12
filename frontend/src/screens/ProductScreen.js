@@ -34,7 +34,7 @@ function ProductScreen() {
 
   const dispatch = useDispatch();
   const data = useSelector((state) => state);
-  console.log(data);
+ 
   const addtocarthandler = (id) => {
   //  const existsItem = data.product.CartsItems.find((x)=> x.item.id == id);
     
@@ -69,10 +69,10 @@ function ProductScreen() {
   //  const [product ,setproducts] =useState([])
  
   const toshow = data.product.products.find((ele) => {
-    return ele.id == slug;
+    return ele._id == slug;
   });
   
-  
+  console.log(toshow);
 
   return(
     data.product.loading ? (
@@ -132,7 +132,7 @@ function ProductScreen() {
                   {toshow.countInStock > 0 && (
                     <ListGroup.Item>
                       <div className="d-grid">
-                        <Button onClick={()=>addtocarthandler(toshow.id)} variant="primary">Add to Cart</Button>
+                        <Button onClick={()=>addtocarthandler(toshow._id)} variant="primary">Add to Cart</Button>
                       </div>
                     </ListGroup.Item>
                   )}

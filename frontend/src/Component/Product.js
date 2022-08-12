@@ -15,7 +15,7 @@ function Product(props) {
     };
   return (
     <Card key={product.slug}>
-                  <Link to={`/product/${product.id}`}>
+                  <Link to={`/product/${product._id}`}>
                     <img src={product.image} className="card-img-top" alt={product.name} />
                   </Link>
                   <Card.Body>
@@ -25,7 +25,7 @@ function Product(props) {
                     </Link>
                     <Rating rating ={product.rating} numReviews={product.numReviews}></Rating>
                     <Card.Text>${product.price}</Card.Text> 
-                    <Button onClick={()=>addtocarthandler(product.id)} >Add to cart</Button>
+                    <Button onClick={()=>addtocarthandler(product._id)} >Add to cart</Button>
                     </Card.Body>
                     
                 </Card>
