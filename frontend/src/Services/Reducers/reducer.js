@@ -4,7 +4,9 @@ const initialState = {
   products: [],
   loading: true,
   error: "",
-  CartsItems: localStorage.getItem('Cartitems')?JSON.parse(localStorage.getItem('Cartitems')):[]
+  CartsItems: localStorage.getItem('Cartitems')?JSON.parse(localStorage.getItem('Cartitems')):[],
+  userInfo:localStorage.getItem('userInfo')?JSON.parse(localStorage.getItem('userInfo')):null,
+  shippingAddress:localStorage.getItem('shippingAddress')?JSON.parse(localStorage.getItem('shippingAddress')):{},
 };
 
 export function FETCH(state = initialState, action) {
@@ -56,6 +58,22 @@ export function FETCH(state = initialState, action) {
       ...state,CartsItems:state.CartsItems.filter(item=> item.id !== action.payload.id)
     }
 
+    case "SIGN_IN":
+
+    return{
+              ...state,userInfo:action.payload
+    }
+
+    case "SIGN_OUT":
+
+      return{
+                ...state,userInfo:null
+      }
+
+    case "SAVE_SHIPPING":
+      return {
+        ...state,shippingAddress:action.payload
+      }  
     default:
       return state;
   }

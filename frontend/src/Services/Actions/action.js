@@ -45,10 +45,22 @@ export const removefromcart = (id) =>{
 
     } 
 }  
-//  
-//export const watch_later=(data)=>{
-     
-//     return {
-//        type:WATCH_LATER,
-//         data:data       
-//     }
+ export const signin = (data)=>{
+   return (dispatch)=>{
+     dispatch({type:"SIGN_IN" ,payload:data})
+   }
+ }
+export const signout=()=>{
+  return (dispatch)=>{
+    dispatch({type:"SIGN_OUT"})
+  }
+   
+
+
+  }
+
+  export const saveshipping=(data)=>{
+    return (dispatch)=>{
+      dispatch({type:'SAVE_SHIPPING' ,payload:data})
+    }
+  }
