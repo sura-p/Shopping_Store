@@ -23,6 +23,8 @@ import { NavDropdown } from "react-bootstrap";
 import { signout } from "./Services/Actions/action";
 import ShippingAddress from "./screens/ShippingAddress";
 import SignupScreen from "./screens/SignupScreen";
+import PaymentMethod from "./screens/PaymentMethod";
+import PlaceOrder from "./screens/PlaceOrder";
 
 function App() {
   const data = useSelector((state) => state.product.CartsItems);
@@ -92,6 +94,8 @@ function App() {
           <Route path='/signup' element={<SignupScreen/>}/>
           <Route path='/product/:slug' element={<ProductScreen/>}/>
           <Route path='/shipping' element={<ShippingAddress/>}/>
+          <Route path='/payment' element={<PaymentMethod/>}/>
+          <Route path='/placeorder' element={<PlaceOrder/>}/>
         </Routes>
         </Container>
       </main>

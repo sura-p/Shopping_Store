@@ -1,10 +1,33 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button } from 'react-bootstrap'
 import { Form } from 'react-bootstrap'
 import { Helmet } from 'react-helmet-async'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { Navigate } from 'react-router-dom'
 import CheckSteps from '../Component/CheckSteps'
+import { savepaymentmethod } from '../Services/Actions/action'
 
-function paymentMethod() {
+function PaymentMethod() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const data = useSelector(state=>state.product.shippingAddress);
+const [paymentMethodName,setPaymentMethod] = useState('paypal')
+ 
+useEffect(()=>{
+  if(!data.Address){
+      navigate('/shipping')
+  }
+},[data,navigate])
+
+const handelSubmit =(e)=>{
+
+      e.preventDefault();
+      dispatch(savepaymentmethod(paymentMethodName))
+      localStorage.setItem('payment_method',paymentMethodName);
+      navigate('/placeorder')
+
+    }
 
   return (
       <>
@@ -45,4 +68,4 @@ function paymentMethod() {
   )
 }
 
-export default paymentMethod
+export default PaymentMethod

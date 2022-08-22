@@ -5,6 +5,7 @@ import dotenv from 'dotenv'
 import seedRouter from './Routes/seedRoutes.js';
 import productRouter from './Routes/productRoutes.js';
 import userRoutes from './Routes/userRouter.js';
+import orderRoutes from './Routes/Orderroute.js';
 
 
 
@@ -26,6 +27,7 @@ app.get("/",(req,res)=>{
 });
 app.use('/api/products',productRouter)
 app.use('/api/users',userRoutes)
+app.use('/api/orders',orderRoutes)
 
 app.use((err,req,res,next)=>{
     res.status(500).send({message:err.message});

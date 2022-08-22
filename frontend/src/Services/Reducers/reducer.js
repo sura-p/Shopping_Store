@@ -7,6 +7,7 @@ const initialState = {
   CartsItems: localStorage.getItem('Cartitems')?JSON.parse(localStorage.getItem('Cartitems')):[],
   userInfo:localStorage.getItem('userInfo')?JSON.parse(localStorage.getItem('userInfo')):null,
   shippingAddress:localStorage.getItem('shippingAddress')?JSON.parse(localStorage.getItem('shippingAddress')):{},
+  paymentMethod:localStorage.getItem('payment_method')?localStorage.getItem('payment_method'):''
 };
 
 export function FETCH(state = initialState, action) {
@@ -74,6 +75,12 @@ export function FETCH(state = initialState, action) {
       return {
         ...state,shippingAddress:action.payload
       }  
+
+      case 'SAVE_PAYMENT_METHOD':
+                   return{
+                       ...state,
+                       paymentMethod:action.payload
+                   }
     default:
       return state;
   }

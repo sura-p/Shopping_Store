@@ -1,6 +1,9 @@
 // import { SHOW_MOVIES } from "../constants" 
 // import { WATCH_LATER } from "../constants"
 import axios from "axios";
+import { toast } from "react-toastify";
+import { getError } from "../../utils";
+
 import Product from "../../Component/Product";
 // import {APIkey} from "../../Common/APIs/MovieApiKey";
  
@@ -53,6 +56,9 @@ export const removefromcart = (id) =>{
 export const signout=()=>{
   return (dispatch)=>{
     dispatch({type:"SIGN_OUT"})
+    localStorage.removeItem("userinfo")
+    localStorage.removeItem("shippingAddress")
+    localStorage.removeItem('paymentMethod')
   }
    
 
@@ -62,5 +68,49 @@ export const signout=()=>{
   export const saveshipping=(data)=>{
     return (dispatch)=>{
       dispatch({type:'SAVE_SHIPPING' ,payload:data})
+    }
+  }
+
+
+  export const savepaymentmethod= (data)=>{
+    return (dispatch)=>{
+      dispatch({type:'SAVE_PAYMENT_METHOD',payload:data})
+    }
+
+  }
+
+
+  export const placeorder = (data)=>{
+    return (dispatch)=>{
+      dispatch({type:'CREATE_REQUEST'})
+console.log(data);
+      try {
+        const result = axios({
+          method: 'post',
+          url: '/api/orders',
+          data:{
+            orderitems:data.CartsItems,
+            shippingAddress:data.shippingAddress,
+            paymentMethod:data.paymentMethod,
+            itemsPrice:data.itemprice,
+            shippingprice:data.Shippingprice,
+            taxprice:data.taxprice,
+            totalprice:data.totalprice,
+          },
+          headers: {
+            authorization:`Bearer ${data.userInfo.token}`
+          }
+  
+        })
+          .then(function (response) {
+            console.log(response);
+            dispatch({ type: 'CREATE_SUCESS'});
+          })
+  
+      } catch (error) {
+        dispatch({ type: 'CREATE_FAIL'})
+        toast.error(getError(error))
+  
+      }
     }
   }
