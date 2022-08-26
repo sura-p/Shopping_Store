@@ -22,11 +22,11 @@ function OrderScreen() {
     const dispatch = useDispatch()
     const userInfo=  useSelector(state=>state.product.userInfo)
     const order=  useSelector(state=>state.orderlist)
-    console.log(order);
+   
     const navigate = useNavigate();
     const params = useParams();
     const {id:orderId} = params;
-    console.log(orderId);
+   
     
   const [{isPending},paypalDispatch] = usePayPalScriptReducer()
 
@@ -42,7 +42,7 @@ function OrderScreen() {
   
   function onApprove(data,actions){
     return actions.order.capture().then(async function (details){
-     dispatch(pay({id:order.order._id ,user:userInfo,detail:details}))
+     dispatch(pay({id:order.order._id ,user:userInfo,detail:details,data:data}))
     })
   }
   
@@ -70,12 +70,12 @@ function OrderScreen() {
             }
     
           }).then((res)=>{
-            console.log(res);
+            
             paypalDispatch({
               type:'resetOption',
               value:{
                 'client-id':res.data,
-                currency:'INR'
+                currency:'USD'
               }
             })
             paypalDispatch({type:'setLoadingStatus',value:'pending'})
@@ -116,7 +116,7 @@ function OrderScreen() {
                     </a>
                   )} */}
               </Card.Text>
-              {order.isDelivered ? (
+              {order.order.isDelivered ? (
                 <MessageBox variant="success">
                   Delivered at {order.order.deliveredAt}
                 </MessageBox>
@@ -131,9 +131,9 @@ function OrderScreen() {
               <Card.Text>
                 <strong>Method:</strong> {order.order.paymentMethod}
               </Card.Text>
-              {order.isPaid ? (
+              {order.order.isPaid ? (
                 <MessageBox variant="success">
-                  Paid at {order.paidAt}
+                  Paid at {order.order.paidAt}
                 </MessageBox>
               ) : (
                 <MessageBox variant="danger">Not Paid</MessageBox>

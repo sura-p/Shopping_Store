@@ -102,7 +102,7 @@ export const signout=()=>{
   
         })
           .then(function (response) {
-            console.log(response);
+          
             dispatch({ type: 'FETCH_SUCCESS',payload:response.data});
           })
       } catch (error) {
@@ -139,7 +139,7 @@ export const signout=()=>{
   }
   export const orderHistory = (data)=>{
     return (dispatch)=>{
-      console.log(data.user.token);
+   
       dispatch({type:'FETCH_HISTORY'})
       try {
         axios({
@@ -147,7 +147,7 @@ export const signout=()=>{
           url:'/api/orders/mine',
           headers:{authorization:`Bearer ${data.user.token}`},
         }).then((res)=>{
-          console.log(res);
+          
           dispatch({type:'FETCH_HISTORY_SUCCESS',payload:res.data})
         })
       } catch (error) {

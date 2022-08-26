@@ -72,7 +72,7 @@ function ProductScreen() {
     return ele._id == slug;
   });
   
-  console.log(toshow);
+  
 
   return(
     data.product.loading ? (

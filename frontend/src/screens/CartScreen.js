@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 function CartScreen() {
     const navigate = useNavigate()
   const data = useSelector((state) => state.product.CartsItems);
-  console.log(data);
+  
   const dispatch = useDispatch();
 
   const checkoutHandler =()=>{

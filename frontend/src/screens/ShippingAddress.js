@@ -11,7 +11,7 @@ import { saveshipping } from "../Services/Actions/action";
 function ShippingAddress() {
   const data = useSelector((state=>state.product.shippingAddress))
   const userInfo = useSelector((state=>state.product.userInfo))
-  console.log(userInfo);
+  
   const navigate = useNavigate()
   const [fullName, SetfullName] = useState(data.fullName||"");
   const [Address, SetAddress] = useState(data.Address||"");

@@ -9,7 +9,7 @@ import { orderHistory } from "../Services/Actions/action";
 
 function OdrderHistory() {
   const orderhistory = useSelector((state) => state.orderHistory);
-  console.log(orderhistory);
+
   const userInfo = useSelector((state) => state.product.userInfo);
   const navigate = useNavigate();
   const dispatch = useDispatch();

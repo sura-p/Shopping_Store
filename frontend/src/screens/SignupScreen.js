@@ -25,7 +25,7 @@ function SignupScreen() {
 userInfo = useSelector((state)=>state.product.userInfo)
   const submitHandler = async (e) => {
     e.preventDefault();
-    console.log(password,cnfpassword);
+  
     if(password!== cnfpassword){
       toast.error("password do not match");
       return;
@@ -48,7 +48,7 @@ userInfo = useSelector((state)=>state.product.userInfo)
             navigate(redirect || '/');
           })
         .catch(function (error) {
-         console.log(error);
+        toast.error(getError(error))
         });
 }
   // const submitHandler = async(e)=>{

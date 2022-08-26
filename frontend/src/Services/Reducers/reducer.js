@@ -32,7 +32,7 @@ export function FETCH(state = initialState, action) {
         const inCart = state.CartsItems.some((item) =>
         item._id == action.payload.id ? true : false
       );
-      console.log(inCart);
+      
       // data[0].quantity = action.payload.quantity;
       const a = inCart
       ? state.CartsItems.map((item) =>

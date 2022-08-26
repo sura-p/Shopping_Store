@@ -32,7 +32,7 @@ function App() {
   const data = useSelector((state) => state.product.CartsItems);
 
   const userinfo = useSelector((state)=>state.product)
-  console.log(userinfo.userInfo);
+ 
   // const check =userinfo.length>0?true:false;
   // console.log(check);
   const[count,setcount]=useState(0)
