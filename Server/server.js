@@ -28,7 +28,9 @@ app.get("/",(req,res)=>{
 app.use('/api/products',productRouter)
 app.use('/api/users',userRoutes)
 app.use('/api/orders',orderRoutes)
-
+app.get('/api/keys/paypal',(req,res)=>{
+    res.send(process.env.CLIENT_ID || 'sb');
+})
 app.use((err,req,res,next)=>{
     res.status(500).send({message:err.message});
 })

@@ -1,12 +1,15 @@
-const initialstate = {
+const initialState = {
 
     loading:false,
-    error:''
+    error:'',
+   
 
 }
 
-export const request =(state=initialstate,action)=>{
+export function request(state=initialState,action){
+  
     switch (action.type) {
+       
         case 'CREATE_REQUEST':
             return{ ...state,loading:true
 

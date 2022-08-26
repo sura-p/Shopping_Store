@@ -4,7 +4,11 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import { getError } from "../../utils";
 
+
 import Product from "../../Component/Product";
+import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { browserHistory } from "../..";
 // import {APIkey} from "../../Common/APIs/MovieApiKey";
  
 export const fetchdata =  () => { 
@@ -80,23 +84,18 @@ export const signout=()=>{
   }
 
 
-  export const placeorder = (data)=>{
+
+
+  export const fetchorder = (data)=>{
+    
     return (dispatch)=>{
-      dispatch({type:'CREATE_REQUEST'})
-console.log(data);
+      
+      dispatch({type:'FETCH_REQUEST'})
       try {
         const result = axios({
-          method: 'post',
-          url: '/api/orders',
-          data:{
-            orderitems:data.CartsItems,
-            shippingAddress:data.shippingAddress,
-            paymentMethod:data.paymentMethod,
-            itemsPrice:data.itemprice,
-            shippingprice:data.Shippingprice,
-            taxprice:data.taxprice,
-            totalprice:data.totalprice,
-          },
+          method: 'get',
+          url: `/api/orders/${data.id}`,
+          
           headers: {
             authorization:`Bearer ${data.userInfo.token}`
           }
@@ -104,13 +103,58 @@ console.log(data);
         })
           .then(function (response) {
             console.log(response);
-            dispatch({ type: 'CREATE_SUCESS'});
+            dispatch({ type: 'FETCH_SUCCESS',payload:response.data});
           })
-  
       } catch (error) {
-        dispatch({ type: 'CREATE_FAIL'})
-        toast.error(getError(error))
-  
+        dispatch({type:'FETCH_FAIL' , payload:getError(error)})
       }
     }
+  }
+
+  export const pay=(data)=>{
+    return(dispatch)=>{
+      try {
+        dispatch({type:'PAY_REQUEST'})
+        axios({
+          method:'put',
+          url:`/api/orders/${data.id}/pay`,
+          
+          
+            headers:{authorization:`Bearer ${data.user.token}`},
+          
+            
+        }).then((res)=>{
+          dispatch({type:'PAY_SUCCESS',payload:res.data})
+        toast.success('Order Is Paid')
+        
+        })
+      } catch (error) {
+        dispatch({type:'PAY_FAIL',payload:getError(error)})
+        toast.error(getError(error))
+      }
+    }
+    
+    
+
+  }
+  export const orderHistory = (data)=>{
+    return (dispatch)=>{
+      console.log(data.user.token);
+      dispatch({type:'FETCH_HISTORY'})
+      try {
+        axios({
+          method:'get',
+          url:'/api/orders/mine',
+          headers:{authorization:`Bearer ${data.user.token}`},
+        }).then((res)=>{
+          console.log(res);
+          dispatch({type:'FETCH_HISTORY_SUCCESS',payload:res.data})
+        })
+      } catch (error) {
+        dispatch({type:'FETCH_HISTORY_FAIL',payload:getError(error)})
+        
+      }
+
+    }
+      
   }

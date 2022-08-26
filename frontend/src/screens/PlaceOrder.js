@@ -10,6 +10,12 @@ import { Link } from 'react-router-dom'
 import CheckSteps from '../Component/CheckSteps'
 import { placeorder } from '../Services/Actions/action'
 import LoadingBox from '../Component/LoadingBox'
+import { Navigate } from 'react-router-dom'
+import axios from 'axios'
+import { browserHistory } from '..'
+import { getError } from '../utils'
+import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
 
 function PlaceOrder() {
 const data = useSelector(state=>state.product.shippingAddress)
@@ -17,10 +23,43 @@ const data1 = useSelector(state=>state.product.paymentMethod)
 const data2 = useSelector(state=>state.product.CartsItems)
 const data3 = useSelector(state=>state.product)
 const data4 = useSelector(state=>state.order)
+const navigate = useNavigate()
 const dispatch = useDispatch()
 
 const placeOrderHandle=(data)=>{
-    dispatch(placeorder(data))
+
+    try {
+        dispatch({ type: 'CREATE_REQUEST'});
+        axios({
+          method: 'post',
+          url: '/api/orders',
+          data:{
+            orderitems:data.CartsItems,
+            shippingAddress:data.shippingAddress,
+            paymentMethod:data.paymentMethod,
+            itemsPrice:data.itemprice,
+            shippingprice:data.Shippingprice,
+            taxprice:data.taxprice,
+            totalprice:data.totalprice,
+          },
+          headers: {
+            authorization:`Bearer ${data.userInfo.token}`
+          }
+  
+        })
+          .then(function (res) {
+            dispatch({ type: 'CREATE_SUCESS'});
+            localStorage.removeItem('Cartitems')
+            navigate(`/order/${res.data.neworder._id}`)
+          })
+  
+      } catch (error) {
+        dispatch({ type: 'CREATE_FAIL'});
+        toast.error(getError(error))
+  
+      }
+    
+    
 }
   const round2 = (num)=> Math.round(num*100 + Number.EPSILON)/100;
   data3.itemprice=round2(data2.reduce((a,c)=> a+c.qty *c.price,0));
