@@ -7,7 +7,7 @@ import { Badge } from "react-bootstrap";
 import { Col } from "react-bootstrap";
 import { Row } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import logger from "use-reducer-logger";
+
 import Rating from "../Component/Rating";
 import { Helmet } from "react-helmet-async";
 import LoadingBox from "../Component/LoadingBox";

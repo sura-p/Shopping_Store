@@ -3,7 +3,7 @@ import React, { useEffect, useReducer, useState } from "react";
 import { Link } from "react-router-dom";
 // import data from "../data";
 import axios from 'axios'
-import logger from 'use-reducer-logger'
+
 import { Col, Row } from "react-bootstrap";
 import Product from "../Component/Product";
 import { Helmet } from "react-helmet-async";
