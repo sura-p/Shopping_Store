@@ -27,7 +27,7 @@ import PaymentMethod from "./screens/PaymentMethod";
 import PlaceOrder from "./screens/PlaceOrder";
 import OrderScreen from "./screens/OrderScreen";
 import OdrderHistory from "./screens/OdrderHistory";
-
+import ProfileScreen from './screens/ProfileScreen'
 function App() {
   const data = useSelector((state) => state.product.CartsItems);
 
@@ -94,6 +94,7 @@ function App() {
           <Route path='/cart' element={<CartScreen/>}/>
           <Route path='/signin' element={<SigninScreen/>}/>
           <Route path='/signup' element={<SignupScreen/>}/>
+          <Route path='/profile' element={<ProfileScreen/>}/>
           <Route path='/product/:slug' element={<ProductScreen/>}/>
           <Route path='/shipping' element={<ShippingAddress/>}/>
           <Route path='/payment' element={<PaymentMethod/>}/>

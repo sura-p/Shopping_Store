@@ -1,7 +1,7 @@
 import express from 'express'
 import User from '../models/usermodel.js';
 import bcrypt from 'bcryptjs'
-import { generateToken } from '../utils.js';
+import { generateToken, isAuth } from '../utils.js';
 import expressAsyncHandler from 'express-async-handler'
 const userRoutes = express.Router();
 
@@ -38,4 +38,26 @@ userRoutes.post('/signup' ,async (req,res)=>{
             token:generateToken(user)
         });
 })
+
+
+userRoutes.put('/profile',isAuth,expressAsyncHandler(async(req,res)=>{
+    const user = await User.findById(req.user._id);
+    if(user){
+        user.name = req.body.name || user.name;
+        user.email = req.body.email || user.email;
+        if(req.body.password){
+            user.password = bcrypt.hashSync(req.body.password,8);
+        }
+        const updateuser = await user.save();
+        res.send({
+            id:updateuser._id,
+            name:updateuser.name,
+            email:updateuser.email,
+            token:generateToken(updateuser)
+        })
+    }
+    else{
+        res.status(404).send({message:'User not found'});
+    }
+}))
 export default userRoutes;

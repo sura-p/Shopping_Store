@@ -1,0 +1,21 @@
+{
+  "name": "shopping_store",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build":"cd Server && npm install && cd ../frontend && npm install && npm run build",
+    "start": "node Server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sura-p/Shopping_Store.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sura-p/Shopping_Store/issues"
+  },
+  "homepage": "https://github.com/sura-p/Shopping_Store#readme"
+}

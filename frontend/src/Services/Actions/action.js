@@ -158,3 +158,35 @@ export const signout=()=>{
     }
       
   }
+
+export const  updateuser =(data)=>{
+    return (dispatch)=>{
+      dispatch({type:'UPDATE_REQUEST'})
+      try {
+        axios({
+          method:'put',
+          url:'/api/users/profile',
+          data:{
+           name:data.Name,
+           email:data.email,
+           password:data.pass,
+          },
+          headers:{ Authorization: `Bearer ${data.info.token}` },
+        }).then((res)=>{
+          dispatch({type:'SIGN_IN',payload:res.data})
+          dispatch({type: 'UPDATE_SUCCESS'})
+          localStorage.setItem('userInfo', JSON.stringify(res.data));
+          toast.success('User updated successfully');
+          
+        })
+
+      } catch (error) {
+        dispatch({
+          type: 'FETCH_FAIL',
+        });
+        toast.error(getError(error));
+        
+      }
+    }
+
+}

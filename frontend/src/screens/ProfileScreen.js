@@ -1,12 +1,13 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import { Form } from 'react-bootstrap'
+import { Button, Form } from 'react-bootstrap'
 import { Helmet } from 'react-helmet-async'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateuser } from '../Services/Actions/action'
 
 function ProfileScreen() {
     const userInfo=  useSelector(state=>state.product.userInfo)
-  
+   const dispatch = useDispatch();
   
     const [name, setName] = useState(userInfo.name);
     const [email, setEmail] = useState(userInfo.email);
@@ -14,32 +15,9 @@ function ProfileScreen() {
     const [confirmPassword, setConfirmPassword] = useState('');
   
   
-    const submitHandler = async (e) => {
+    const submitHandler =  (e) => {
         e.preventDefault();
-        try {
-          const { data } = await axios.put(
-            '/api/users/profile',
-            {
-              name,
-              email,
-              password,
-            },
-            {
-              headers: { Authorization: `Bearer ${userInfo.token}` },
-            }
-          );
-          dispatch({
-            type: 'UPDATE_SUCCESS',
-          });
-          ctxDispatch({ type: 'USER_SIGNIN', payload: data });
-          localStorage.setItem('userInfo', JSON.stringify(data));
-          toast.success('User updated successfully');
-        } catch (err) {
-          dispatch({
-            type: 'FETCH_FAIL',
-          });
-          toast.error(getError(err));
-        }
+        dispatch(updateuser({info:userInfo,Name:name,email:email,pass:password}));
       };
 
     return (
