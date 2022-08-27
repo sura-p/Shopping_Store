@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import MessageBox from "../Component/MessageBox";
 import { addtocart, removefromcart } from "../Services/Actions/action";
 import { Card } from "react-bootstrap";
-import { ListGroupItem } from "react-bootstrap";
+
 import { useNavigate } from "react-router-dom";
 
 function CartScreen() {
@@ -92,7 +92,7 @@ function CartScreen() {
                   </ListGroup.Item>
                   <ListGroup.Item>
                       <div className="d-grid">
-                          <Button type="button" variant="primary" disabled={data.length==0 } onClick={checkoutHandler}>
+                          <Button type="button" variant="primary" disabled={data.length===0 } onClick={checkoutHandler}>
                               Proceed to Checkout
                           </Button>
                       </div>

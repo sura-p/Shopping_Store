@@ -21,7 +21,7 @@ export function FETCH(state = initialState, action) {
     case "CART_ADD_ITEMS":
       const data = state.products.find((item) => item._id === action.payload.id);
       const Cart = state.CartsItems.find((item) =>
-      item._id == action.payload.id ? true : false
+      item._id === action.payload.id ? true : false
     );
       if(Cart?.qty>data?.countInStock){
 
@@ -30,7 +30,7 @@ export function FETCH(state = initialState, action) {
       }
       else{
         const inCart = state.CartsItems.some((item) =>
-        item._id == action.payload.id ? true : false
+        item._id === action.payload.id ? true : false
       );
       
       // data[0].quantity = action.payload.quantity;

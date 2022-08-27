@@ -1,8 +1,9 @@
-import axios from 'axios'
+
 import React, { useState } from 'react'
 import { Button, Form } from 'react-bootstrap'
 import { Helmet } from 'react-helmet-async'
 import { useDispatch, useSelector } from 'react-redux'
+import { toast } from 'react-toastify'
 import { updateuser } from '../Services/Actions/action'
 
 function ProfileScreen() {
@@ -17,7 +18,12 @@ function ProfileScreen() {
   
     const submitHandler =  (e) => {
         e.preventDefault();
-        dispatch(updateuser({info:userInfo,Name:name,email:email,pass:password}));
+        if(password === confirmPassword){
+          dispatch(updateuser({info:userInfo,Name:name,email:email,pass:password}));
+        }
+        else{
+          toast.error("password not matched")
+        }
       };
 
     return (

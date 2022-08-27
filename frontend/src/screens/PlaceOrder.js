@@ -8,11 +8,11 @@ import { Helmet } from 'react-helmet-async'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import CheckSteps from '../Component/CheckSteps'
-import { placeorder } from '../Services/Actions/action'
+
 import LoadingBox from '../Component/LoadingBox'
-import { Navigate } from 'react-router-dom'
+
 import axios from 'axios'
-import { browserHistory } from '..'
+
 import { getError } from '../utils'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'

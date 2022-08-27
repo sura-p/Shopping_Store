@@ -1,13 +1,13 @@
 import { PayPalButtons, usePayPalScriptReducer } from '@paypal/react-paypal-js';
 import axios from 'axios';
-import { Axios } from 'axios';
+
 import React, { useEffect } from 'react'
-import { ListGroupItem } from 'react-bootstrap';
+
 import { Col } from 'react-bootstrap';
 import { ListGroup } from 'react-bootstrap';
 import { Card } from 'react-bootstrap';
 import { Row } from 'react-bootstrap';
-import { useIsRTL } from 'react-bootstrap/esm/ThemeProvider';
+
 import { Helmet } from 'react-helmet-async';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
@@ -17,7 +17,7 @@ import { toast } from 'react-toastify';
 import LoadingBox from '../Component/LoadingBox';
 import MessageBox from '../Component/MessageBox'
 import { fetchorder, pay } from '../Services/Actions/action';
-import { getError } from '../utils';
+
 function OrderScreen() {
     const dispatch = useDispatch()
     const userInfo=  useSelector(state=>state.product.userInfo)

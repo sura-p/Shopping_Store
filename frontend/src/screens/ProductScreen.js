@@ -1,6 +1,6 @@
-import axios from "axios";
+
 import { Button } from "react-bootstrap";
-import React, { useEffect, useReducer } from "react";
+import React from "react";
 import { ListGroup } from "react-bootstrap";
 import { Card } from "react-bootstrap";
 import { Badge } from "react-bootstrap";
@@ -69,7 +69,7 @@ function ProductScreen() {
   //  const [product ,setproducts] =useState([])
  
   const toshow = data.product.products.find((ele) => {
-    return ele._id == slug;
+    return ele._id === slug;
   });
   
   

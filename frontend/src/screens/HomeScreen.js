@@ -1,8 +1,8 @@
 
-import React, { useEffect, useReducer, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect} from "react";
+
 // import data from "../data";
-import axios from 'axios'
+
 
 import { Col, Row } from "react-bootstrap";
 import Product from "../Component/Product";
@@ -24,7 +24,7 @@ function HomeScreen() {
   //  const [product ,setproducts] =useState([])
   useEffect(() => {
   dispatch(fetchdata())
-  }, [])
+  }, [dispatch])
   return (
     <div>
       <Helmet><title>Shopping Cart</title></Helmet>

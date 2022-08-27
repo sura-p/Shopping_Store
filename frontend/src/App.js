@@ -1,9 +1,9 @@
-import logo from "./logo.svg";
+
 import "./App.css";
 //import data from "../../Server/data/data";
 import {Link} from 'react-router-dom'
-import { BrowserRouter } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
+
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Routes } from "react-router-dom";
 import { Route } from "react-router-dom";
@@ -12,12 +12,12 @@ import ProductScreen from "./screens/ProductScreen";
 import {Navbar,Container} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap'
 import { Nav } from "react-bootstrap";
-import { CarouselItem } from "react-bootstrap";
+
 import { useDispatch, useSelector } from "react-redux";
 import { Badge } from "react-bootstrap";
 import CartScreen from "./screens/CartScreen";
 import { useEffect, useState } from "react";
-import { NavItem } from "react-bootstrap";
+
 import SigninScreen from "./screens/SigninScreen";
 import { NavDropdown } from "react-bootstrap";
 import { signout } from "./Services/Actions/action";

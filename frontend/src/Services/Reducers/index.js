@@ -1,4 +1,4 @@
-import { Placeholder } from 'react-bootstrap';
+
 import {combineReducers} from 'redux'
 import { request } from './PlaceOrderreducer';
 import { OrderFetch } from './OrderReducer';

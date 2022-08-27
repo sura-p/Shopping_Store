@@ -5,17 +5,14 @@ import { toast } from "react-toastify";
 import { getError } from "../../utils";
 
 
-import Product from "../../Component/Product";
-import { Navigate } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { browserHistory } from "../..";
+
 // import {APIkey} from "../../Common/APIs/MovieApiKey";
  
 export const fetchdata =  () => { 
     return (dispatch)=>{
     dispatch({ type: 'FETCH_REQUEST' });
     try {
-      const result = axios({
+       axios({
         method: 'get',
         url: '/api/products',
         headers: {
@@ -92,7 +89,7 @@ export const signout=()=>{
       
       dispatch({type:'FETCH_REQUEST'})
       try {
-        const result = axios({
+         axios({
           method: 'get',
           url: `/api/orders/${data.id}`,
           
