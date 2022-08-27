@@ -22,9 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 app.use('/api/seed',seedRouter)
 
-app.get("/",(req,res)=>{
-    res.send("API is running");
-});
+
 app.use('/api/products',productRouter)
 app.use('/api/users',userRoutes)
 app.use('/api/orders',orderRoutes)
