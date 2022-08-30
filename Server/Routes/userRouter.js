@@ -3,6 +3,7 @@ import User from '../models/usermodel.js';
 import bcrypt from 'bcryptjs'
 import { generateToken, isAuth } from '../utils.js';
 import expressAsyncHandler from 'express-async-handler'
+import nodemailer  from 'nodemailer'
 const userRoutes = express.Router();
 
 userRoutes.post('/signin',expressAsyncHandler(async(req,res)=>{
@@ -30,6 +31,25 @@ userRoutes.post('/signup' ,async (req,res)=>{
             password:bcrypt.hashSync(req.body.password)
         })
         const user = await newUser.save();
+        let testAccount = await nodemailer.createTestAccount();
+        console.log(testAccount);
+        let transporter = nodemailer.createTransport({
+            service:'gmail',
+            host: "smtp.ethereal.email",
+            port: 587,
+            secure: false, // true for 465, false for other ports
+            auth: {
+              user: 'shopping.cart.ind.lgo@gmail.com', // generated ethereal user
+              pass: 'Suraj@123', // generated ethereal password
+            }
+        })
+        await transporter.sendMail({
+            from: 'suraj.prajapati@mail.vinove.com', // sender address
+            to: "ashish.agrawal1@mail.vinove.com", // list of receivers
+            subject: "Hello Bro ✔", // Subject line
+            text: "welcome to shopping cart", // plain text body
+            html: "<b>Hello world?</b>", // html body
+          });
         res.send({
             _id: user._id,
             name: user.name,

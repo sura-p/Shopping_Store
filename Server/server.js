@@ -40,4 +40,4 @@ app.use((err,req,res,next)=>{
 })
 
 
-app.listen(5001,console.log("server running ..."));
+app.listen(5000,console.log("server running ..."));
