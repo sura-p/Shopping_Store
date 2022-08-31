@@ -7,7 +7,7 @@ import { Helmet } from "react-helmet-async";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import MessageBox from "../Component/MessageBox";
-import { addtocart, removefromcart } from "../Services/Actions/action";
+import { addtocart, removefromcart, removefromcart2 } from "../Services/Actions/action";
 import { Card } from "react-bootstrap";
 
 import { useNavigate } from "react-router-dom";
@@ -24,6 +24,10 @@ function CartScreen() {
 
   const updateCartHandler = (item) => {
     dispatch(addtocart(item));
+  };
+
+  const updateCartHandler2 = (item) => {
+    dispatch(removefromcart2(item));
   };
   const removecartitem = (item) => {
     dispatch(removefromcart(item));
@@ -53,7 +57,7 @@ function CartScreen() {
                       ></img>
                     </Col>
                     <Col md={3}>
-                      <Button variant="light" disabled={item.qty === 1}>
+                      <Button variant="light" disabled={item.qty === 1} onClick={() => updateCartHandler2(item._id)}>
                         <i className="fas fa-minus-circle"></i>
                       </Button>
                       <span>{item.qty}</span>

@@ -50,13 +50,44 @@ export function FETCH(state = initialState, action) {
 
       }
       
-     
+      case "CART_ADD_REMOVE_ITEMS":
+        const data1 = state.products.find((item) => item._id === action.payload.id);
+        const Cart1 = state.CartsItems.find((item) =>
+        item._id === action.payload.id ? true : false
+      );
+        if(Cart1?.qty>data1?.countInStock){
+  
+          window.alert("out of stock")
+         return{...state,CartsItems:[...state.CartsItems]}
+        }
+        else{
+          const inCart = state.CartsItems.some((item) =>
+          item._id === action.payload.id ? true : false
+        );
+        
+        // data[0].quantity = action.payload.quantity;
+        const a = inCart
+        ? state.CartsItems.map((item) =>
+      
+            item._id === action.payload.id
+              ? { ...item, qty: item.qty-=1 }
+              : item
+          )
+        : [...state.CartsItems, { ...data, qty: 1 }]
+        localStorage.setItem('Cartitems',JSON.stringify(a));
+        return {
+          ...state,
+          CartsItems:a 
+        };
+  
+        }
+        
     // console.log(data[0].quantity);
 
     case "REMOVE_CART_ITEM":
       
     return{
-      ...state,CartsItems:state.CartsItems.filter(item=> item.id !== action.payload.id)
+      ...state,CartsItems:state.CartsItems.filter(item=> item._id !== action.payload.id)
     }
 
     case "SIGN_IN":

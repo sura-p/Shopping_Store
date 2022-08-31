@@ -49,6 +49,13 @@ export const removefromcart = (id) =>{
 
     } 
 }  
+
+export const removefromcart2 = (id) =>{
+  return (dispatch)=>{
+    dispatch({ type: 'CART_ADD_REMOVE_ITEMS' ,payload:{id}});
+
+  } 
+} 
  export const signin = (data)=>{
    return (dispatch)=>{
      dispatch({type:"SIGN_IN" ,payload:data})

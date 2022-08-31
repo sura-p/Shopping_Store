@@ -30,9 +30,9 @@ userRoutes.post('/signup' ,async (req,res)=>{
             email:req.body.email,
             password:bcrypt.hashSync(req.body.password)
         })
+
+        lo
         const user = await newUser.save();
-        let testAccount = await nodemailer.createTestAccount();
-        console.log(testAccount);
         let transporter = nodemailer.createTransport({
             service:'gmail',
             host: "smtp.ethereal.email",
@@ -40,16 +40,17 @@ userRoutes.post('/signup' ,async (req,res)=>{
             secure: false, // true for 465, false for other ports
             auth: {
               user: 'shopping.cart.ind.lgo@gmail.com', // generated ethereal user
-              pass: 'Suraj@123', // generated ethereal password
+              pass: 'kasmvuqnqvsbugfn', // generated ethereal password
             }
         })
-        await transporter.sendMail({
-            from: 'suraj.prajapati@mail.vinove.com', // sender address
-            to: "ashish.agrawal1@mail.vinove.com", // list of receivers
-            subject: "Hello Bro ✔", // Subject line
+       let x =  await transporter.sendMail({
+            from: 'shopping.cart.ind.lgo@gmail.com', // sender address
+            to: `${req.body.email}`, // list of receivers
+            subject: "Thanks For Registering With Us.", // Subject line
             text: "welcome to shopping cart", // plain text body
-            html: "<b>Hello world?</b>", // html body
+            html: `<b>Thank you for registering with us${req.body.name} .</b>`, // html body
           });
+          console.log(x);
         res.send({
             _id: user._id,
             name: user.name,
