@@ -30,8 +30,6 @@ userRoutes.post('/signup' ,async (req,res)=>{
             email:req.body.email,
             password:bcrypt.hashSync(req.body.password)
         })
-
-        lo
         const user = await newUser.save();
         let transporter = nodemailer.createTransport({
             service:'gmail',
