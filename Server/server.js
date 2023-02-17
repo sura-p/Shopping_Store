@@ -15,7 +15,12 @@ mongoose.connect(process.env.MONGODB_URI).then(()=>{
 }).catch(err=>{
     console.log(err.message);
 });
-
+const apiLimiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // Limit each IP to 100 requests per `window` (here, per 15 minutes)
+  standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
+  legacyHeaders: false, // Disable the `X-RateLimit-*` headers
+});
 
 const app = express();
 app.use(express.json());
@@ -24,7 +29,7 @@ app.use('/api/seed',seedRouter)
 
 
 app.use('/api/products',productRouter)
-app.use('/api/users',userRoutes)
+app.use("/api/users", apiLimiter, userRoutes);
 app.use('/api/orders',orderRoutes)
 app.get('/api/keys/paypal',(req,res)=>{
     res.send(process.env.CLIENT_ID || 'sb');
